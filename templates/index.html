@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NDRF Disaster Intelligence Dashboard</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- Leaflet Map CSS -->
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    >
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body class="dashboard-page">
+
+<section class="intro-loader" id="introLoader" aria-label="Initializing NDRF Disaster Intelligence">
+
+    <div class="intro-grid" aria-hidden="true"></div>
+
+    <div class="intro-orbit intro-orbit-one" aria-hidden="true"></div>
+    <div class="intro-orbit intro-orbit-two" aria-hidden="true"></div>
+    <div class="intro-orbit intro-orbit-three" aria-hidden="true"></div>
+
+    <div class="intro-content">
+
+        <div class="intro-brand-mark" aria-hidden="true">
+            <div class="intro-cube">
+                <span class="cube-face cube-front">N</span>
+                <span class="cube-face cube-back">D</span>
+                <span class="cube-face cube-right">R</span>
+                <span class="cube-face cube-left">F</span>
+                <span class="cube-face cube-top"></span>
+                <span class="cube-face cube-bottom"></span>
+            </div>
+        </div>
+
+        <p class="intro-kicker">NATIONAL EMERGENCY OPERATIONS</p>
+        <h1>NDRF <span>COMMAND</span></h1>
+        <p class="intro-status"><i></i> Establishing secure intelligence link</p>
+
+        <div class="intro-progress" aria-hidden="true">
+            <span></span>
+        </div>
+
+        <div class="intro-meta" aria-hidden="true">
+            <span>NODE 07</span>
+            <span>ENCRYPTED</span>
+            <span>LIVE SYSTEM</span>
+        </div>
+
+    </div>
+
+</section>
+
+<div class="app">
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar">
+
+        <nav class="navigation">
+
+            <a class="nav-btn active" href="{{ url_for('dashboard') }}" aria-current="page">
+                <span aria-hidden="true">
+                    <svg viewBox="0 0 24 24">
+                        <rect x="3" y="3" width="7" height="7" rx="1"></rect>
+                        <rect x="14" y="3" width="7" height="7" rx="1"></rect>
+                        <rect x="3" y="14" width="7" height="7" rx="1"></rect>
+                        <rect x="14" y="14" width="7" height="7" rx="1"></rect>
+                    </svg>
+                </span>
+                Dashboard
+            </a>
+
+            <button
+                id="themeButton"
+                class="nav-btn theme-toggle"
+                type="button"
+                aria-label="Switch to bright mode"
+                title="Switch to bright mode"
+            >
+                ☾ Bright mode
+            </button>
+
+            <a class="nav-btn" href="{{ url_for('monitors') }}">
+                <span aria-hidden="true">
+                    <svg viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="8"></circle>
+                        <path d="M12 8v4l3 2"></path>
+                    </svg>
+                </span>
+                Real-time Monitors
+            </a>
+
+            <a class="nav-btn alert-nav" href="{{ url_for('alerts') }}">
+                <span aria-hidden="true">
+                    <svg viewBox="0 0 24 24">
+                        <path d="m12 3 9 17H3L12 3Z"></path>
+                        <path d="M12 9v4"></path>
+                        <circle class="alert-dot" cx="12" cy="16.5" r=".7"></circle>
+                    </svg>
+                </span>
+                Predicted Alerts
+            </a>
+
+            <a class="nav-btn" href="{{ url_for('geospatial') }}">
+                <span aria-hidden="true">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"></path>
+                        <circle cx="12" cy="10" r="2.5"></circle>
+                    </svg>
+                </span>
+                Geo-Spatial Analysis
+            </a>
+
+            <a class="nav-btn" href="{{ url_for('history') }}">
+                <span aria-hidden="true">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M5 4h14v16H5z"></path>
+                        <path d="M8 8h8M8 12h8M8 16h5"></path>
+                    </svg>
+                </span>
+                Historical Inventory
+            </a>
+
+            <a class="nav-btn" href="{{ url_for('resources') }}">
+                <span aria-hidden="true">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M3 7h11M3 12h18M3 17h11"></path>
+                        <path d="m16 5 5 2-5 2z"></path>
+                    </svg>
+                </span>
+                Resource Deployment
+            </a>
+
+            <a class="nav-btn" href="{{ url_for('settings') }}">
+                <span aria-hidden="true">
+                    <svg viewBox="0 0 24 24">
+                        <path d="m9.7 3.7.6-1.2h3.4l.6 1.2 1.7.7 1.2-.6 2.4 2.4-.6 1.2.7 1.7 1.2.6v3.4l-1.2.6-.7 1.7.6 1.2-2.4 2.4-1.2-.6-1.7.7-.6 1.2h-3.4l-.6-1.2-1.7-.7-1.2.6-2.4-2.4.6-1.2-.7-1.7-1.2-.6v-3.4l1.2-.6.7-1.7-.6-1.2 2.4-2.4 1.2.6 1.7-.7Z"></path>
+                        <circle cx="12" cy="12" r="3.2"></circle>
+                    </svg>
+                </span>
+                Settings
+            </a>
+
+        </nav>
+
+
+        <div class="system-secure">
+
+            <div class="secure-light"></div>
+
+            <div>
+                <strong>System Secure</strong>
+                <small>Encrypted connection</small>
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <!-- ================= MAIN CONTENT ================= -->
+
+    <main class="main">
+
+        <!-- HEADER -->
+
+        <header class="top-header">
+
+            <div class="government">
+
+                <div class="government-details">
+                    <img
+                        class="government-image"
+                        src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg"
+                        alt="State Emblem of India"
+                    >
+
+                    <h3>Ministry of Home Affairs</h3>
+
+                    <p>
+                        National Disaster Response Force • Government of India
+                    </p>
+
+                </div>
+
+                <span class="government-divider" aria-hidden="true"></span>
+
+                <div class="ndrf-header-group">
+                    <img
+                        class="ndrf-header-image"
+                        src="{{ url_for('static', filename='img/image.png') }}"
+                        alt="National Disaster Response Force"
+                    >
+                    <strong>NDRF</strong>
+                </div>
+
+            </div>
+
+            <div class="header-right">
+
+            </div>
+
+        </header>
+
+
+        <!-- PAGE TITLE -->
+
+        <section class="page-title">
+
+            <div>
+
+                <span class="small-title">
+                    NATIONAL EMERGENCY OPERATIONS
+                </span>
+
+                <h1>
+                    Disaster Intelligence Dashboard
+                </h1>
+
+                <p>
+                    Real-time monitoring, prediction and response coordination
+                </p>
+
+            </div>
+
+
+            <div class="system-live">
+
+                <span></span>
+
+                SYSTEM LIVE
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= SYSTEM HEALTH ================= -->
+
+        <section class="health-card">
+
+            <h3>Live System Health</h3>
+
+            <div class="health-container">
+
+                <div class="health-item">
+
+                    <span class="health-check">
+                        ✓
+                    </span>
+
+                    <span>
+                        IoT Sensors
+                    </span>
+
+                    <strong id="sensor">
+                        1,284
+                    </strong>
+
+                </div>
+
+
+                <div class="health-item">
+
+                    <span class="health-check">
+                        ✓
+                    </span>
+
+                    <span>
+                        Data Integration Status
+                    </span>
+
+                    <strong>
+                        98.7%
+                    </strong>
+
+                </div>
+
+
+                <div class="health-item">
+
+                    <span class="health-check">
+                        ✓
+                    </span>
+
+                    <span>
+                        Slope Stability Zones
+                    </span>
+
+                    <strong>
+                        642
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= MAIN GRID ================= -->
+
+        <section class="dashboard-grid">
+
+
+            <!-- ================= MAP ================= -->
+
+            <div class="card map-card">
+
+                <div class="map-header">
+
+                    <div>
+
+                        <span>
+                            GEO-SPATIAL MONITORING
+                        </span>
+
+                        <h2>
+                            Himachal Pradesh Sector
+                        </h2>
+
+                    </div>
+
+
+                    <div class="map-buttons">
+
+                        <button class="map-btn active" data-layer="all">
+                            All
+                        </button>
+
+                        <button class="map-btn" data-layer="rain">
+                            Rainfall
+                        </button>
+
+                        <button class="map-btn" data-layer="slope">
+                            Slope
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <div id="map"></div>
+
+
+                <!-- MAP LEGEND -->
+
+                <div class="map-legend">
+
+                    <div>
+                        <i class="red-line"></i>
+                        Rainfall Intensity
+                    </div>
+
+                    <div>
+                        <i class="orange-dot"></i>
+                        Soil Moisture Grid
+                    </div>
+
+                    <div>
+                        <i class="yellow-line"></i>
+                        Slope Stability Zones
+                    </div>
+
+                    <div>
+                        <i class="green-node"></i>
+                        Evacuation Nodes
+                    </div>
+
+                </div>
+
+
+                <div class="map-status">
+
+                    <b>LIVE</b>
+
+                    <span>
+                        7 high-risk zones detected
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= ALERT MATRIX ================= -->
+
+            <div class="card alert-card">
+
+                <div class="card-heading">
+
+                    <div>
+
+                        <span>
+                            ACTIVE ALERT MATRIX
+                        </span>
+
+                        <h2>
+                            <b id="wardNumber">4</b>
+                            Wards - Red Alert
+                        </h2>
+
+                    </div>
+
+                    <div class="danger">
+                        <svg viewBox="0 0 24 24" role="img" aria-label="Active alerts">
+                            <path d="M12 3 22 20H2L12 3Z"></path>
+                            <path d="M12 9v5"></path>
+                            <circle cx="12" cy="17.5" r=".7"></circle>
+                        </svg>
+                    </div>
+
+                </div>
+
+
+                <div class="alerts">
+
+                    <div class="alert priority-alert red">
+
+                        <div class="alert-symbol">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M12 3 22 20H2L12 3Z"></path>
+                                <path d="M12 9v5"></path>
+                                <circle class="alert-dot" cx="12" cy="17.5" r=".7"></circle>
+                            </svg>
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Event: Ground Movement
+                            </strong>
+
+                            <p>
+                                Detected near Kullu district
+                            </p>
+
+                            <small>
+                                1 min ago
+                            </small>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="alert priority-alert yellow">
+
+                        <div class="alert-symbol">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M12 3 22 20H2L12 3Z"></path>
+                                <path d="M12 9v5"></path>
+                                <circle class="alert-dot" cx="12" cy="17.5" r=".7"></circle>
+                            </svg>
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Rainfall Threshold
+                            </strong>
+
+                            <p>
+                                Exceeded - 1 hour trend
+                            </p>
+
+                            <small>
+                                3 min ago
+                            </small>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="alert priority-alert red">
+
+                        <div class="alert-symbol">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M12 3 22 20H2L12 3Z"></path>
+                                <path d="M12 9v5"></path>
+                                <circle class="alert-dot" cx="12" cy="17.5" r=".7"></circle>
+                            </svg>
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Warning: Slope Instability
+                            </strong>
+
+                            <p>
+                                Detected in high-risk zone
+                            </p>
+
+                            <small>
+                                6 min ago
+                            </small>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="alert priority-alert yellow">
+
+                        <div class="alert-symbol">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M12 3 22 20H2L12 3Z"></path>
+                                <path d="M12 9v5"></path>
+                                <circle class="alert-dot" cx="12" cy="17.5" r=".7"></circle>
+                            </svg>
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Line Feed Warning
+                            </strong>
+
+                            <p>
+                                Network disruption predicted
+                            </p>
+
+                            <small>
+                                9 min ago
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <a id="viewAlerts" class="view-alerts" href="{{ url_for('alerts') }}">
+                    View all alerts →
+                </a>
+
+            </div>
+
+
+            <!-- ================= RAINFALL CHART ================= -->
+
+            <div class="card chart-card">
+
+                <div class="card-heading">
+
+                    <div>
+
+                        <span>
+                            MULTI-SOURCE DATA ANALYTICS
+                        </span>
+
+                        <h2>
+                            Rainfall vs. Threshold Trend
+                        </h2>
+
+                    </div>
+
+                    <small class="live">
+                        LIVE
+                    </small>
+
+                </div>
+
+
+                <div class="chart-container">
+
+                    <canvas id="rainChart"></canvas>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= SOIL MOISTURE ================= -->
+
+            <div class="card moisture-card">
+
+                <div class="card-heading">
+
+                    <div>
+
+                        <span>
+                            SOIL MOISTURE (IoT) STATUS
+                        </span>
+
+                        <h2>
+                            Current Moisture Level
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+                <div class="gauge">
+
+                    <div class="gauge-circle"></div>
+
+                    <div class="needle"></div>
+
+                    <div class="gauge-value">
+
+                        <strong id="moisture">
+                            76
+                        </strong>
+
+                        <span>
+                            %
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="gauge-scale">
+
+                    <span>0</span>
+                    <span>50</span>
+                    <span>100</span>
+
+                </div>
+
+
+                <div class="moisture-warning">
+                    CAUTION — HIGH MOISTURE
+                </div>
+
+            </div>
+
+
+            <!-- ================= LEAD TIME ================= -->
+
+            <div class="card lead-card">
+
+                <div class="card-heading">
+
+                    <div>
+
+                        <span>
+                            PREDICTED LEAD TIME
+                        </span>
+
+                        <h2>
+                            Evacuation Readiness
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+                <div class="lead-list">
+
+                    <div>
+                        <span>
+                            Specific Ward 1
+                        </span>
+
+                        <b>
+                            12 <small>minutes</small>
+                        </b>
+                    </div>
+
+
+                    <div>
+                        <span>
+                            Specific Ward 2
+                        </span>
+
+                        <b>
+                            8 <small>minutes</small>
+                        </b>
+                    </div>
+
+
+                    <div>
+                        <span>
+                            Specific Ward 3
+                        </span>
+
+                        <b>
+                            21 <small>minutes</small>
+                        </b>
+                    </div>
+
+
+                    <div>
+                        <span>
+                            Specific Ward 4
+                        </span>
+
+                        <b>
+                            16 <small>minutes</small>
+                        </b>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= STATISTICS ================= -->
+
+        <section class="statistics">
+
+
+            <div class="stat">
+
+                <div class="stat-icon sensor-icon">
+                    ◉
+                </div>
+
+                <div>
+
+                    <small>
+                        ACTIVE SENSORS
+                    </small>
+
+                    <strong>
+                        1,284
+                    </strong>
+
+                    <em>
+                        +4.2%
+                    </em>
+
+                </div>
+
+            </div>
+
+
+            <div class="stat">
+
+                <div class="stat-icon risk-icon">
+                    ▲
+                </div>
+
+                <div>
+
+                    <small>
+                        HIGH-RISK ZONES
+                    </small>
+
+                    <strong>
+                        7
+                    </strong>
+
+                    <em>
+                        +2 zones
+                    </em>
+
+                </div>
+
+            </div>
+
+
+            <div class="stat">
+
+                <div class="stat-icon evacuation-icon">
+                    ⌖
+                </div>
+
+                <div>
+
+                    <small>
+                        EVACUATION NODES
+                    </small>
+
+                    <strong>
+                        36
+                    </strong>
+
+                    <em>
+                        All operational
+                    </em>
+
+                </div>
+
+            </div>
+
+
+            <div class="stat">
+
+                <div class="stat-icon teams-icon">
+                    ▣
+                </div>
+
+                <div>
+
+                    <small>
+                        DEPLOYED TEAMS
+                    </small>
+
+                    <strong>
+                        18
+                    </strong>
+
+                    <em>
+                        4 on standby
+                    </em>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- FOOTER -->
+
+        <footer>
+
+            <span>
+                © 2026 National Disaster Response Force
+            </span>
+
+            <span>
+                Last data synchronization:
+                <b id="sync">
+                    just now
+                </b>
+            </span>
+
+        </footer>
+
+    </main>
+
+</div>
+
+
+<!-- Leaflet JavaScript -->
+
+<script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+</script>
+
+
+<!-- Chart.js -->
+
+<script
+    src="https://cdn.jsdelivr.net/npm/chart.js">
+</script>
+
+
+<!-- Custom JavaScript -->
+
+<script src="{{ url_for('static', filename='js/api.js') }}"></script>
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+</body>
+</html>

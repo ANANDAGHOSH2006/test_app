@@ -1,0 +1,126 @@
+.navigation {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.navigation .nav-btn {
+    border: 0;
+    background: transparent;
+    text-decoration: none;
+    color: #8ba1b0;
+    padding: 12px 11px;
+    margin: 0;
+    border-radius: 7px;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font: inherit;
+    font-size: 13px;
+    transition: .2s;
+}
+
+.navigation .nav-btn span {
+    width: 17px;
+    height: 17px;
+    text-align: center;
+    flex: 0 0 17px;
+}
+
+.navigation .nav-btn svg {
+    width: 17px;
+    height: 17px;
+    display: block;
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.7;
+}
+
+.navigation .nav-btn svg .alert-dot {
+    fill: currentColor;
+    stroke: none;
+}
+
+.navigation .nav-btn:hover {
+    background: rgba(255,255,255,.06);
+    color: white;
+}
+
+.navigation .nav-btn.active {
+    background: #078fe3;
+    color: white;
+}
+
+body.dark {
+    background: #071c2c;
+    color: #e4f0f5;
+}
+
+body.dark main,
+body.dark .content {
+    background: #071c2c;
+    color: #e4f0f5;
+}
+
+body.dark header {
+    background: #102c3e;
+    border-color: #25485c;
+}
+
+body.dark .search {
+    background: #18384a;
+    border-color: #315064;
+    color: #b9d0da;
+}
+
+body.dark .search input {
+    color: #e4f0f5;
+}
+
+body.dark .notification-button:hover,
+body.dark .notification-button:focus-visible {
+    background: #18384a;
+}
+
+body.dark .heading h1,
+body.dark .heading h2,
+body.dark .heading p,
+body.dark .panel,
+body.dark .card,
+body.dark .map-panel,
+body.dark .panel-title,
+body.dark table,
+body.dark th,
+body.dark td,
+body.dark label,
+body.dark select,
+body.dark .setting-row,
+body.dark .setting-row p {
+    color: #e4f0f5;
+}
+
+body.dark .panel,
+body.dark .card,
+body.dark .map-panel {
+    background: #102c3e;
+    border-color: #315064;
+}
+
+body.dark th,
+body.dark .panel-title {
+    background: #18384a;
+}
+
+body.dark td,
+body.dark .setting-row {
+    border-color: #315064;
+}
+
+body.dark select {
+    background: #18384a;
+    border-color: #315064;
+}

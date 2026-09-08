@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NDRF | Predicted Alerts</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/alerts.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/navigation.css') }}">
+</head>
+<body>
+
+<aside class="sidebar">
+    <div class="logo-area">
+        <div class="logo">
+            <svg viewBox="0 0 512 512" role="img" aria-label="National Disaster Response Force emblem">
+                <defs><path id="alertsLogoTextPath" d="M 92,256 A 164,164 0 0,1 420,256" /></defs>
+                <circle cx="256" cy="256" r="232" fill="#123B5D" stroke="#E3B52F" stroke-width="14" />
+                <circle cx="256" cy="256" r="203" fill="#F7F4E8" stroke="#E3B52F" stroke-width="5" />
+                <text fill="#123B5D" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="700" letter-spacing="1.2" text-anchor="middle"><textPath href="#alertsLogoTextPath" startOffset="50%">NATIONAL DISASTER RESPONSE FORCE</textPath></text>
+                <circle cx="256" cy="255" r="92" fill="#1268A5" stroke="#E3B52F" stroke-width="7" />
+                <circle cx="256" cy="255" r="76" fill="#0D5B91" stroke="#FFFFFF" stroke-width="3" />
+                <path d="M256 190 L317 303 H195 Z" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round" />
+                <path d="M256 215 L289 277 H223 Z" fill="#1268A5" opacity=".95" />
+                <path d="M78 355 L136 342 L126 420 L78 392 Z" fill="#B98219" /><path d="M434 355 L376 342 L386 420 L434 392 Z" fill="#B98219" />
+                <path d="M112 345 Q256 326 400 345 L382 414 Q256 433 130 414 Z" fill="#E3B52F" stroke="#9B6B13" stroke-width="4" stroke-linejoin="round" />
+                <path d="M132 358 Q256 343 380 358" fill="none" stroke="#FFF4B0" stroke-width="3" opacity=".8" />
+                <text x="256" y="389" fill="#123B5D" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="800" letter-spacing="1" text-anchor="middle">AAPDA SEVA SADAIV</text>
+            </svg>
+        </div>
+        <div>
+            <h2>NDRF</h2>
+            <span>DISASTER INTELLIGENCE</span>
+        </div>
+    </div>
+
+    {% include '_navigation.html' %}
+</aside>
+
+<main>
+<header>
+    <form class="search" role="search" onsubmit="return runPageSearch(event)">
+        <input type="search" placeholder="Search..." aria-label="Search page content">
+        <button type="submit" aria-label="Search">⌕</button>
+    </form>
+    <div><button class="notification-button" type="button" aria-label="Open notifications" title="Notifications">🔔</button></div>
+</header>
+
+<section class="content">
+
+<div class="heading">
+    <div>
+        <span>AI EARLY WARNING SYSTEM</span>
+        <h1>Predicted Alerts</h1>
+        <p>AI-powered risk prediction and early warning system.</p>
+    </div>
+
+    <button onclick="runPrediction()">Run Prediction</button>
+</div>
+
+<div class="cards">
+
+<div class="card">
+    <div class="icon blue">◈</div>
+    <h2>8</h2>
+    <p>Total Alerts</p>
+    <b>Today</b>
+</div>
+
+<div class="card">
+    <div class="icon red">!</div>
+    <h2>4</h2>
+    <p>High Risk</p>
+    <b class="redText">Immediate Action</b>
+</div>
+
+<div class="card">
+    <div class="icon yellow">△</div>
+    <h2>3</h2>
+    <p>Medium Risk</p>
+    <b class="yellowText">Monitor</b>
+</div>
+
+<div class="card">
+    <div class="icon green">✓</div>
+    <h2>1</h2>
+    <p>Low Risk</p>
+    <b>Observation</b>
+</div>
+
+</div>
+
+<div class="panel">
+
+<div class="panel-title">
+    <h2>Upcoming Alerts</h2>
+    <span>AI Confidence: <b>94.2%</b></span>
+</div>
+
+<table>
+<thead>
+<tr>
+<th>Area</th>
+<th>Type</th>
+<th>Risk Level</th>
+<th>Expected Time</th>
+<th>Action</th>
+</tr>
+</thead>
+
+<tbody>
+
+<tr>
+<td>Darjeeling</td>
+<td>Landslide</td>
+<td><span class="danger">● High</span></td>
+<td>12 Apr 10:00</td>
+<td><button class="small" onclick="viewAlert()">View</button></td>
+</tr>
+
+<tr>
+<td>Jalpaiguri</td>
+<td>Flood</td>
+<td><span class="danger">● High</span></td>
+<td>12 Apr 14:00</td>
+<td><button class="small">View</button></td>
+</tr>
+
+<tr>
+<td>Cooch Behar</td>
+<td>Heavy Rainfall</td>
+<td><span class="warning">● Medium</span></td>
+<td>12 Apr 10:00</td>
+<td><button class="small">View</button></td>
+</tr>
+
+<tr>
+<td>Siliguri</td>
+<td>Flood</td>
+<td><span class="warning">● Medium</span></td>
+<td>12 Apr 02:00</td>
+<td><button class="small">View</button></td>
+</tr>
+
+<tr>
+<td>Alipurduar</td>
+<td>Landslide</td>
+<td><span class="normal">● Low</span></td>
+<td>13 Apr 06:00</td>
+<td><button class="small">View</button></td>
+</tr>
+
+</tbody>
+</table>
+
+</div>
+
+</section>
+</main>
+
+<script src="{{ url_for('static', filename='js/search.js') }}"></script>
+<script src="{{ url_for('static', filename='js/api.js') }}"></script>
+<script src="{{ url_for('static', filename='js/alerts.js') }}"></script>
+<script src="{{ url_for('static', filename='js/navigation.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,293 @@
+*{box-sizing:border-box}
+
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:#edf5f7;
+color:#15364d
+}
+
+.sidebar{
+position:fixed;
+width:250px;
+height:100vh;
+background:#062d4b;
+color:white;
+padding:18px 12px
+}
+
+.logo-area{
+display:flex;
+align-items:center;
+gap:11px;
+padding:10px 10px 18px;
+margin-bottom:14px;
+border:1px solid rgba(150,190,215,.12);
+border-radius:10px;
+background:linear-gradient(145deg,rgba(19,55,79,.72),rgba(6,18,29,.92))
+}
+
+.logo{
+width:48px;
+height:48px;
+flex:0 0 48px;
+border:1px solid rgba(170,196,208,.55);
+border-radius:50%;
+background:#e6f0f5;
+overflow:hidden;
+box-shadow:0 0 0 3px rgba(66,217,179,.08),0 8px 18px rgba(0,0,0,.24)
+}
+
+.logo svg{width:100%;height:100%;display:block}
+
+.logo-area h2{margin:0;color:white;font-size:22px;font-weight:800;letter-spacing:1px}
+
+.logo-area span{
+display:block;
+font-size:8px;
+color:#9dbfd2;
+letter-spacing:1px
+}
+
+nav a{
+display:block;
+padding:13px;
+margin:5px 0;
+color:#d4e5ef;
+text-decoration:none;
+border-radius:7px;
+font-size:13px
+}
+
+nav a:hover,
+nav a.active{
+background:#078fe3;
+color:white
+}
+
+main{margin-left:250px}
+
+header{
+height:70px;
+background:white;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:0 28px;
+border-bottom:1px solid #d5e2e7;
+font-size:12px
+}
+
+.search{
+width:330px;
+display:flex;
+align-items:center;
+background:#eaf2f5;
+padding:11px 15px;
+border-radius:7px;
+color:#607b8b
+}
+
+.search input{
+flex:1;
+min-width:0;
+border:0;
+outline:0;
+background:transparent;
+color:#15364d;
+font:inherit
+}
+
+.search button{
+border:0;
+background:transparent;
+padding:0 2px;
+color:#078fe3;
+font-size:16px;
+cursor:pointer
+}
+
+.notification-button{
+border:0;
+background:transparent;
+padding:5px 7px;
+border-radius:6px;
+font-size:15px;
+cursor:pointer;
+line-height:1
+}
+
+.notification-button:hover,
+.notification-button:focus-visible{
+background:#eaf2f5;
+outline:2px solid #078fe3;
+outline-offset:2px
+}
+
+.content{padding:25px 30px}
+
+.heading{
+display:flex;
+justify-content:space-between;
+align-items:center
+}
+
+.heading span{
+font-size:10px;
+letter-spacing:1px;
+color:#557487
+}
+
+.heading h1{
+font-family:Georgia,serif;
+font-size:28px;
+margin:6px 0
+}
+
+.heading p{
+font-size:12px;
+color:#708694
+}
+
+button{
+border:0;
+background:#078fe3;
+color:white;
+padding:10px 16px;
+border-radius:6px;
+font-weight:bold;
+cursor:pointer
+}
+
+.cards{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:14px;
+margin-top:20px
+}
+
+.card{
+background:white;
+border:1px solid #d4e1e6;
+border-radius:9px;
+padding:18px
+}
+
+.icon{
+width:40px;
+height:40px;
+border-radius:7px;
+display:grid;
+place-items:center;
+float:left;
+margin-right:12px
+}
+
+.blue{background:#e7f4fb;color:#078fe3}
+.red{background:#ffe8e8;color:#e44747}
+.yellow{background:#fff3d9;color:#d99b00}
+.green{background:#e8f7f1;color:#0a9b73}
+
+.card h2{
+margin:0;
+font-size:22px
+}
+
+.card p{
+font-size:11px;
+color:#708694;
+margin:7px 0
+}
+
+.card b{
+font-size:10px;
+color:#0a9b73
+}
+
+.redText{color:#df4545!important}
+.yellowText{color:#c38a00!important}
+
+.panel{
+background:white;
+border:1px solid #d4e1e6;
+border-radius:9px;
+padding:18px;
+margin-top:15px
+}
+
+.panel-title{
+display:flex;
+justify-content:space-between;
+align-items:center
+}
+
+.panel-title h2{
+font-family:Georgia,serif;
+font-size:17px
+}
+
+.panel-title span{
+font-size:10px;
+color:#718795
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+font-size:11px
+}
+
+th{
+text-align:left;
+padding:13px;
+background:#f3f8fa;
+color:#577283
+}
+
+td{
+padding:14px;
+border-bottom:1px solid #e0e9ed
+}
+
+.danger,
+.warning,
+.normal{
+padding:5px 9px;
+border-radius:15px;
+font-size:9px;
+font-weight:bold
+}
+
+.danger{
+background:#ffe8e8;
+color:#df4545
+}
+
+.warning{
+background:#fff2d8;
+color:#b47c00
+}
+
+.normal{
+background:#e7f7f0;
+color:#07966f
+}
+
+.small{
+padding:7px 13px;
+font-size:10px;
+background:#e7f3f8;
+color:#0879a7
+}
+
+@media(max-width:900px){
+.sidebar{width:200px}
+main{margin-left:200px}
+.cards{grid-template-columns:repeat(2,1fr)}
+}
+
+@media(max-width:650px){
+.sidebar{position:static;width:100%;height:auto}
+main{margin-left:0}
+.cards{grid-template-columns:1fr}
+}

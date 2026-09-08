@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>NDRF | Application Settings</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/settings.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/navigation.css') }}">
+</head>
+
+<body>
+
+<aside class="sidebar">
+
+<div class="logo-area">
+<div class="logo"><svg viewBox="0 0 512 512" role="img" aria-label="National Disaster Response Force emblem"><defs><path id="settingsLogoTextPath" d="M 92,256 A 164,164 0 0,1 420,256" /></defs><circle cx="256" cy="256" r="232" fill="#123B5D" stroke="#E3B52F" stroke-width="14" /><circle cx="256" cy="256" r="203" fill="#F7F4E8" stroke="#E3B52F" stroke-width="5" /><text fill="#123B5D" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="700" letter-spacing="1.2" text-anchor="middle"><textPath href="#settingsLogoTextPath" startOffset="50%">NATIONAL DISASTER RESPONSE FORCE</textPath></text><circle cx="256" cy="255" r="92" fill="#1268A5" stroke="#E3B52F" stroke-width="7" /><circle cx="256" cy="255" r="76" fill="#0D5B91" stroke="#FFFFFF" stroke-width="3" /><path d="M256 190 L317 303 H195 Z" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round" /><path d="M256 215 L289 277 H223 Z" fill="#1268A5" opacity=".95" /><path d="M78 355 L136 342 L126 420 L78 392 Z" fill="#B98219" /><path d="M434 355 L376 342 L386 420 L434 392 Z" fill="#B98219" /><path d="M112 345 Q256 326 400 345 L382 414 Q256 433 130 414 Z" fill="#E3B52F" stroke="#9B6B13" stroke-width="4" stroke-linejoin="round" /><path d="M132 358 Q256 343 380 358" fill="none" stroke="#FFF4B0" stroke-width="3" opacity=".8" /><text x="256" y="389" fill="#123B5D" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="800" letter-spacing="1" text-anchor="middle">AAPDA SEVA SADAIV</text></svg></div>
+<div>
+<h2>NDRF</h2>
+<span>DISASTER INTELLIGENCE</span>
+</div>
+</div>
+
+{% include '_navigation.html' %}
+
+</aside>
+
+<main>
+
+<header>
+<form class="search" role="search" onsubmit="return runPageSearch(event)">
+<input type="search" placeholder="Search settings..." aria-label="Search settings">
+<button type="submit" aria-label="Search settings">⌕</button>
+</form>
+<div><button class="notification-button" type="button" aria-label="Open notifications" title="Notifications">🔔</button></div>
+</header>
+
+<section class="content">
+
+<div class="heading">
+
+<div>
+<span>APPLICATION CONFIGURATION</span>
+<h1>Settings</h1>
+<p>Configure application preferences, monitoring and system behavior.</p>
+</div>
+
+<button onclick="saveSettings()">Save Changes</button>
+
+</div>
+
+<div class="layout">
+
+<div class="settings-area">
+
+<div class="panel">
+
+<h2>General Application Settings</h2>
+<p class="description">
+Control the main behavior and appearance of the Disaster Intelligence application.
+</p>
+
+<div class="setting-row">
+<div>
+<b>Auto Refresh Dashboard</b>
+<p>Automatically update dashboard information.</p>
+</div>
+<div class="switch on" onclick="toggleSwitch(this)"></div>
+</div>
+
+<div class="setting-row">
+<div>
+<b>Real-time Data Processing</b>
+<p>Process incoming sensor information continuously.</p>
+</div>
+<div class="switch on" onclick="toggleSwitch(this)"></div>
+</div>
+
+<div class="setting-row">
+<div>
+<b>Live Map Updates</b>
+<p>Automatically update disaster map layers.</p>
+</div>
+<div class="switch on" onclick="toggleSwitch(this)"></div>
+</div>
+
+<div class="setting-row">
+<div>
+<b>System Activity Logging</b>
+<p>Record application events and system activities.</p>
+</div>
+<div class="switch on" onclick="toggleSwitch(this)"></div>
+</div>
+
+</div>
+
+<div class="panel">
+
+<h2>Monitoring Configuration</h2>
+
+<div class="form">
+
+<div>
+<label>DATA REFRESH INTERVAL</label>
+<select>
+<option>30 Seconds</option>
+<option>1 Minute</option>
+<option>5 Minutes</option>
+<option>10 Minutes</option>
+</select>
+</div>
+
+<div>
+<label>SENSOR UPDATE MODE</label>
+<select>
+<option>Real-time</option>
+<option>Every 30 Seconds</option>
+<option>Every 1 Minute</option>
+</select>
+</div>
+
+<div>
+<label>DEFAULT MAP LAYER</label>
+<select>
+<option>Satellite + Terrain</option>
+<option>Street Map</option>
+<option>Terrain</option>
+</select>
+</div>
+
+<div>
+<label>DEFAULT RISK LEVEL</label>
+<select>
+<option>All Risk Levels</option>
+<option>High Risk</option>
+<option>Medium Risk</option>
+<option>Low Risk</option>
+</select>
+</div>
+
+</div>
+
+</div>
+
+<div class="panel">
+
+<h2>Alert Configuration</h2>
+
+<div class="setting-row">
+<div>
+<b>Rainfall Threshold Alerts</b>
+<p>Generate warning when rainfall crosses configured threshold.</p>
+</div>
+<div class="switch on" onclick="toggleSwitch(this)"></div>
+</div>
+
+<div class="setting-row">
+<div>
+<b>Slope Instability Detection</b>
+<p>Enable automatic landslide risk detection.</p>
+</div>
+<div class="switch on" onclick="toggleSwitch(this)"></div>
+</div>
+
+<div class="setting-row">
+<div>
+<b>Flood Prediction</b>
+<p>Enable AI-based flood prediction.</p>
+</div>
+<div class="switch on" onclick="toggleSwitch(this)"></div>
+</div>
+
+</div>
+
+<div class="panel">
+
+<h2>Appearance</h2>
+
+<div class="setting-row">
+<div>
+<b>Dark Mode</b>
+<p>Use dark interface throughout the application.</p>
+</div>
+
+<div class="switch" onclick="toggleDark(this)"></div>
+</div>
+
+<div class="setting-row">
+<div>
+<b>Compact Dashboard</b>
+<p>Reduce spacing between dashboard components.</p>
+</div>
+
+<div class="switch" onclick="toggleSwitch(this)"></div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+</main>
+
+<script src="{{ url_for('static', filename='js/search.js') }}"></script>
+<script src="{{ url_for('static', filename='js/api.js') }}"></script>
+<script src="{{ url_for('static', filename='js/settings.js') }}"></script>
+<script src="{{ url_for('static', filename='js/navigation.js') }}"></script>
+</body>
+</html>

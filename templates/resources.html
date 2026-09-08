@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>NDRF | Resource Deployment</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/resources.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/navigation.css') }}">
+</head>
+
+<body>
+
+<aside class="sidebar">
+
+<div class="logo-area">
+<div class="logo"><svg viewBox="0 0 512 512" role="img" aria-label="National Disaster Response Force emblem"><defs><path id="resourcesLogoTextPath" d="M 92,256 A 164,164 0 0,1 420,256" /></defs><circle cx="256" cy="256" r="232" fill="#123B5D" stroke="#E3B52F" stroke-width="14" /><circle cx="256" cy="256" r="203" fill="#F7F4E8" stroke="#E3B52F" stroke-width="5" /><text fill="#123B5D" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="700" letter-spacing="1.2" text-anchor="middle"><textPath href="#resourcesLogoTextPath" startOffset="50%">NATIONAL DISASTER RESPONSE FORCE</textPath></text><circle cx="256" cy="255" r="92" fill="#1268A5" stroke="#E3B52F" stroke-width="7" /><circle cx="256" cy="255" r="76" fill="#0D5B91" stroke="#FFFFFF" stroke-width="3" /><path d="M256 190 L317 303 H195 Z" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round" /><path d="M256 215 L289 277 H223 Z" fill="#1268A5" opacity=".95" /><path d="M78 355 L136 342 L126 420 L78 392 Z" fill="#B98219" /><path d="M434 355 L376 342 L386 420 L434 392 Z" fill="#B98219" /><path d="M112 345 Q256 326 400 345 L382 414 Q256 433 130 414 Z" fill="#E3B52F" stroke="#9B6B13" stroke-width="4" stroke-linejoin="round" /><path d="M132 358 Q256 343 380 358" fill="none" stroke="#FFF4B0" stroke-width="3" opacity=".8" /><text x="256" y="389" fill="#123B5D" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="800" letter-spacing="1" text-anchor="middle">AAPDA SEVA SADAIV</text></svg></div>
+<div>
+<h2>NDRF</h2>
+<span>DISASTER INTELLIGENCE</span>
+</div>
+</div>
+
+{% include '_navigation.html' %}
+
+</aside>
+
+<main>
+
+<header>
+<form class="search" role="search" onsubmit="return runPageSearch(event)">
+<input type="search" placeholder="Search..." aria-label="Search page content">
+<button type="submit" aria-label="Search">⌕</button>
+</form>
+<div><button class="notification-button" type="button" aria-label="Open notifications" title="Notifications">🔔</button></div>
+</header>
+
+<section class="content">
+
+<div class="heading">
+
+<div>
+<span>FIELD OPERATIONS</span>
+<h1>Resource Deployment</h1>
+<p>Manage and track NDRF teams, equipment and relief resources.</p>
+</div>
+
+<button onclick="addDeployment()">+ Add Deployment</button>
+
+</div>
+
+<div class="cards">
+
+<div class="card">
+<div class="icon">♟</div>
+<h2>18</h2>
+<p>Active Teams</p>
+<b>Ready</b>
+</div>
+
+<div class="card">
+<div class="icon">▣</div>
+<h2>64</h2>
+<p>Equipment Units</p>
+<b>86% Available</b>
+</div>
+
+<div class="card">
+<div class="icon">▤</div>
+<h2>31</h2>
+<p>Relief Materials</p>
+<b>Stocked</b>
+</div>
+
+</div>
+
+<div class="panel">
+
+<div class="tabs">
+<button class="tab active">All</button>
+<button class="tab">Teams</button>
+<button class="tab">Equipment</button>
+<button class="tab">Relief Materials</button>
+</div>
+
+<table>
+
+<thead>
+<tr>
+<th>ID</th>
+<th>Type</th>
+<th>Location</th>
+<th>Status</th>
+<th>Assigned To</th>
+<th>Action</th>
+</tr>
+</thead>
+
+<tbody>
+
+<tr>
+<td>NDRF-001</td>
+<td>Team</td>
+<td>Darjeeling</td>
+<td><span class="transit">In Transit</span></td>
+<td>Team Alpha</td>
+<td><button class="track">Track</button></td>
+</tr>
+
+<tr>
+<td>NDRF-002</td>
+<td>Equipment</td>
+<td>Jalpaiguri</td>
+<td><span class="normal">Deployed</span></td>
+<td>Team Bravo</td>
+<td><button class="track">Track</button></td>
+</tr>
+
+<tr>
+<td>NDRF-003</td>
+<td>Relief Material</td>
+<td>Cooch Behar</td>
+<td><span class="normal">Delivered</span></td>
+<td>Team Charlie</td>
+<td><button class="track">Track</button></td>
+</tr>
+
+<tr>
+<td>NDRF-004</td>
+<td>Team</td>
+<td>Alipurduar</td>
+<td><span class="normal">On Site</span></td>
+<td>Team Delta</td>
+<td><button class="track">Track</button></td>
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</section>
+</main>
+
+<script src="{{ url_for('static', filename='js/search.js') }}"></script>
+<script src="{{ url_for('static', filename='js/api.js') }}"></script>
+<script src="{{ url_for('static', filename='js/resources.js') }}"></script>
+<script src="{{ url_for('static', filename='js/navigation.js') }}"></script>
+</body>
+</html>

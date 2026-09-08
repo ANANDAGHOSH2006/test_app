@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>NDRF | Geo-Spatial Analysis</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/geospatial.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/navigation.css') }}">
+</head>
+
+<body>
+
+<aside class="sidebar">
+
+<div class="logo-area">
+<div class="logo"><svg viewBox="0 0 512 512" role="img" aria-label="National Disaster Response Force emblem"><defs><path id="geospatialLogoTextPath" d="M 92,256 A 164,164 0 0,1 420,256" /></defs><circle cx="256" cy="256" r="232" fill="#123B5D" stroke="#E3B52F" stroke-width="14" /><circle cx="256" cy="256" r="203" fill="#F7F4E8" stroke="#E3B52F" stroke-width="5" /><text fill="#123B5D" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="700" letter-spacing="1.2" text-anchor="middle"><textPath href="#geospatialLogoTextPath" startOffset="50%">NATIONAL DISASTER RESPONSE FORCE</textPath></text><circle cx="256" cy="255" r="92" fill="#1268A5" stroke="#E3B52F" stroke-width="7" /><circle cx="256" cy="255" r="76" fill="#0D5B91" stroke="#FFFFFF" stroke-width="3" /><path d="M256 190 L317 303 H195 Z" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round" /><path d="M256 215 L289 277 H223 Z" fill="#1268A5" opacity=".95" /><path d="M78 355 L136 342 L126 420 L78 392 Z" fill="#B98219" /><path d="M434 355 L376 342 L386 420 L434 392 Z" fill="#B98219" /><path d="M112 345 Q256 326 400 345 L382 414 Q256 433 130 414 Z" fill="#E3B52F" stroke="#9B6B13" stroke-width="4" stroke-linejoin="round" /><path d="M132 358 Q256 343 380 358" fill="none" stroke="#FFF4B0" stroke-width="3" opacity=".8" /><text x="256" y="389" fill="#123B5D" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="800" letter-spacing="1" text-anchor="middle">AAPDA SEVA SADAIV</text></svg></div>
+<div>
+<h2>NDRF</h2>
+<span>DISASTER INTELLIGENCE</span>
+</div>
+</div>
+
+{% include '_navigation.html' %}
+
+</aside>
+
+<main>
+
+<header>
+<form class="search" role="search" onsubmit="return runPageSearch(event)">
+<input type="search" placeholder="Search..." aria-label="Search page content">
+<button type="submit" aria-label="Search">⌕</button>
+</form>
+<div><button class="notification-button" type="button" aria-label="Open notifications" title="Notifications">🔔</button></div>
+</header>
+
+<section class="content">
+
+<div class="heading">
+<div>
+<span>SPATIAL INTELLIGENCE</span>
+<h1>Geo-Spatial Analysis</h1>
+<p>Explore risk zones, terrain and disaster affected areas.</p>
+</div>
+<button onclick="analyze()">Analyze Area</button>
+</div>
+
+<div class="filter">
+
+<div>
+<label>SELECT STATE</label>
+<select>
+<option>West Bengal</option>
+<option>Sikkim</option>
+<option>Assam</option>
+</select>
+</div>
+
+<div>
+<label>SELECT DISTRICT</label>
+<select>
+<option>Darjeeling</option>
+<option>Jalpaiguri</option>
+<option>Kalimpong</option>
+</select>
+</div>
+
+<div>
+<label>RISK LAYER</label>
+<select>
+<option>All Active Layers</option>
+<option>Landslide Risk</option>
+<option>Flood Risk</option>
+</select>
+</div>
+
+<div>
+<label>MAP MODE</label>
+<select>
+<option>Satellite + Terrain</option>
+<option>Street Map</option>
+</select>
+</div>
+
+</div>
+
+<div class="map-panel">
+
+<div class="map-title">
+<h2>Risk Map · Darjeeling District</h2>
+<button onclick="toggleRisk()">Toggle Risk Points</button>
+</div>
+
+<div class="map" id="map">
+
+<div class="pin p1"></div>
+<div class="pin p2"></div>
+<div class="pin p3"></div>
+<div class="pin p4"></div>
+
+<div class="map-label">
+<b>RISK LAYERS</b>
+<br>🔴 Landslide Risk
+<br>🟠 Flood Risk
+<br>🟡 Rainfall Intensity
+<br>🟢 Soil Moisture
+</div>
+
+<div class="map-bottom">
+DARJEELING　 •　 KALIMPONG　 •　 SILIGURI
+</div>
+
+</div>
+
+</div>
+
+</section>
+</main>
+
+<script src="{{ url_for('static', filename='js/search.js') }}"></script>
+<script src="{{ url_for('static', filename='js/api.js') }}"></script>
+<script src="{{ url_for('static', filename='js/geospatial.js') }}"></script>
+<script src="{{ url_for('static', filename='js/navigation.js') }}"></script>
+</body>
+</html>

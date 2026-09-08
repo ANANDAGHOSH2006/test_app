@@ -1,0 +1,78 @@
+<nav class="navigation">
+    <a class="nav-btn{% if request.endpoint == 'dashboard' %} active{% endif %}" href="{{ url_for('dashboard') }}"{% if request.endpoint == 'dashboard' %} aria-current="page"{% endif %}>
+        <span aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+                <rect x="3" y="3" width="7" height="7" rx="1"></rect>
+                <rect x="14" y="3" width="7" height="7" rx="1"></rect>
+                <rect x="3" y="14" width="7" height="7" rx="1"></rect>
+                <rect x="14" y="14" width="7" height="7" rx="1"></rect>
+            </svg>
+        </span>
+        Dashboard
+    </a>
+
+    <button id="themeButton" class="nav-btn theme-toggle" type="button" aria-label="Switch to bright mode" title="Switch to bright mode">
+        ☾ Bright mode
+    </button>
+
+    <a class="nav-btn{% if request.endpoint == 'monitors' %} active{% endif %}" href="{{ url_for('monitors') }}"{% if request.endpoint == 'monitors' %} aria-current="page"{% endif %}>
+        <span aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="8"></circle>
+                <path d="M12 8v4l3 2"></path>
+            </svg>
+        </span>
+        Real-time Monitors
+    </a>
+
+    <a class="nav-btn alert-nav{% if request.endpoint == 'alerts' %} active{% endif %}" href="{{ url_for('alerts') }}"{% if request.endpoint == 'alerts' %} aria-current="page"{% endif %}>
+        <span aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+                <path d="m12 3 9 17H3L12 3Z"></path>
+                <path d="M12 9v4"></path>
+                <circle class="alert-dot" cx="12" cy="16.5" r=".7"></circle>
+            </svg>
+        </span>
+        Predicted Alerts
+    </a>
+
+    <a class="nav-btn{% if request.endpoint == 'geospatial' %} active{% endif %}" href="{{ url_for('geospatial') }}"{% if request.endpoint == 'geospatial' %} aria-current="page"{% endif %}>
+        <span aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+                <path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"></path>
+                <circle cx="12" cy="10" r="2.5"></circle>
+            </svg>
+        </span>
+        Geo-Spatial Analysis
+    </a>
+
+    <a class="nav-btn{% if request.endpoint == 'history' %} active{% endif %}" href="{{ url_for('history') }}"{% if request.endpoint == 'history' %} aria-current="page"{% endif %}>
+        <span aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+                <path d="M5 4h14v16H5z"></path>
+                <path d="M8 8h8M8 12h8M8 16h5"></path>
+            </svg>
+        </span>
+        Historical Inventory
+    </a>
+
+    <a class="nav-btn{% if request.endpoint == 'resources' %} active{% endif %}" href="{{ url_for('resources') }}"{% if request.endpoint == 'resources' %} aria-current="page"{% endif %}>
+        <span aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+                <path d="M3 7h11M3 12h18M3 17h11"></path>
+                <path d="m16 5 5 2-5 2z"></path>
+            </svg>
+        </span>
+        Resource Deployment
+    </a>
+
+    <a class="nav-btn{% if request.endpoint == 'settings' %} active{% endif %}" href="{{ url_for('settings') }}"{% if request.endpoint == 'settings' %} aria-current="page"{% endif %}>
+        <span aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+                <path d="m9.7 3.7.6-1.2h3.4l.6 1.2 1.7.7 1.2-.6 2.4 2.4-.6 1.2.7 1.7 1.2.6v3.4l-1.2.6-.7 1.7.6 1.2-2.4 2.4-1.2-.6-1.7.7-.6 1.2h-3.4l-.6-1.2-1.7-.7-1.2.6-2.4-2.4.6-1.2-.7-1.7-1.2-.6v-3.4l1.2-.6.7-1.7-.6-1.2 2.4-2.4 1.2.6 1.7-.7Z"></path>
+                <circle cx="12" cy="12" r="3.2"></circle>
+            </svg>
+        </span>
+        Settings
+    </a>
+</nav>

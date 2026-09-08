@@ -1,0 +1,122 @@
+{
+  "sensors": [
+    {
+      "id": "SEN-001",
+      "location": "Dehradun Valley",
+      "type": "Rainfall",
+      "value": "86 mm",
+      "status": "High",
+      "updated": "Just now"
+    },
+    {
+      "id": "SEN-002",
+      "location": "Chamoli District",
+      "type": "Slope Stability",
+      "value": "0.72",
+      "status": "Normal",
+      "updated": "Just now"
+    },
+    {
+      "id": "SEN-003",
+      "location": "Kedarnath Route",
+      "type": "Water Level",
+      "value": "4.8 m",
+      "status": "Normal",
+      "updated": "Just now"
+    },
+    {
+      "id": "SEN-004",
+      "location": "Rishikesh Zone",
+      "type": "River Flow",
+      "value": "2,840 m3/s",
+      "status": "Normal",
+      "updated": "Just now"
+    }
+  ],
+  "alerts": [
+    {
+      "id": "ALT-780D67",
+      "location": "Dehradun Valley",
+      "risk": "Medium",
+      "type": "Forecast Risk Zone",
+      "status": "Monitoring",
+      "created": "2026-09-08T17:47:43Z"
+    },
+    {
+      "id": "ALT-001",
+      "location": "Chamoli District",
+      "risk": "High",
+      "type": "Landslide",
+      "status": "Active",
+      "created": "2026-09-08T08:30:00Z"
+    },
+    {
+      "id": "ALT-002",
+      "location": "Rudraprayag",
+      "risk": "High",
+      "type": "Flash Flood",
+      "status": "Active",
+      "created": "2026-09-08T08:12:00Z"
+    },
+    {
+      "id": "ALT-003",
+      "location": "Pithoragarh",
+      "risk": "Medium",
+      "type": "Heavy Rainfall",
+      "status": "Monitoring",
+      "created": "2026-09-07T16:40:00Z"
+    }
+  ],
+  "history": [
+    {
+      "id": "HIS-001",
+      "date": "2026-08-18",
+      "location": "Chamoli",
+      "disaster": "Landslide",
+      "severity": "High",
+      "status": "Resolved"
+    },
+    {
+      "id": "HIS-002",
+      "date": "2026-07-29",
+      "location": "Rudraprayag",
+      "disaster": "Flash Flood",
+      "severity": "High",
+      "status": "Resolved"
+    },
+    {
+      "id": "HIS-003",
+      "date": "2026-06-14",
+      "location": "Pithoragarh",
+      "disaster": "Heavy Rainfall",
+      "severity": "Medium",
+      "status": "Closed"
+    }
+  ],
+  "resources": [
+    {
+      "id": "RES-001",
+      "name": "Rescue Team Alpha",
+      "category": "Teams",
+      "location": "Dehradun Base",
+      "status": "Deployed",
+      "updated": "12 min ago"
+    },
+    {
+      "id": "RES-002",
+      "name": "Inflatable Rescue Boats",
+      "category": "Equipment",
+      "location": "Rishikesh",
+      "status": "In Transit",
+      "updated": "18 min ago"
+    },
+    {
+      "id": "RES-003",
+      "name": "Emergency Medical Kits",
+      "category": "Relief Materials",
+      "location": "Chamoli",
+      "status": "On Site",
+      "updated": "25 min ago"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "switches": [
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true
+  ],
+  "refreshInterval": "30 Seconds",
+  "sensorUpdateMode": "Real-time",
+  "defaultMapLayer": "Satellite + Terrain",
+  "defaultRiskLevel": "All Risk Levels"
+}
